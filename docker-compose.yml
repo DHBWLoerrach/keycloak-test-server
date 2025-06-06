@@ -1,0 +1,49 @@
+services:
+  keycloak:
+    image: quay.io/keycloak/keycloak
+    container_name: keycloak-dev
+    command: start-dev                   
+    ports:
+      - "8080:8080"
+    environment:
+      KC_BOOTSTRAP_ADMIN_USERNAME: admin
+      KC_BOOTSTRAP_ADMIN_PASSWORD: admin
+    volumes:
+      - kc_data:/opt/keycloak/data       
+    healthcheck:
+      test: ["CMD-SHELL", "timeout 10s bash -c '</dev/tcp/localhost/8080' || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 60s
+
+  oauth2-proxy:
+    image: quay.io/oauth2-proxy/oauth2-proxy
+    container_name: oauth2-proxy
+    network_mode: "host"
+    environment:                             
+      OAUTH2_PROXY_PROVIDER: keycloak-oidc
+      OAUTH2_PROXY_OIDC_ISSUER_URL: http://localhost:8080/realms/dhbw
+      OAUTH2_PROXY_REDIRECT_URL: http://localhost:4180/oauth2/callback
+      OAUTH2_PROXY_CLIENT_ID: carpool
+      OAUTH2_PROXY_CLIENT_SECRET: bwXlYIstMmoR95KvaG8QMg4ue9IqQXNe
+      OAUTH2_PROXY_EMAIL_DOMAINS: "*"
+      OAUTH2_PROXY_COOKIE_SECRET: a9jKe8rTqpWL6YXzR3vCbwG1ZfMd7uVA 
+      OAUTH2_PROXY_COOKIE_SECURE: "false"    # HTTP reicht lokal
+      OAUTH2_PROXY_CODE_CHALLENGE_METHOD: S256
+      OAUTH2_PROXY_SCOPE: "openid email profile roles"
+      OAUTH2_PROXY_PASS_ACCESS_TOKEN: "true"
+      OAUTH2_PROXY_PASS_AUTHORIZATION_HEADER: "true"
+      OAUTH2_PROXY_SKIP_PROVIDER_BUTTON: "true"
+      OAUTH2_PROXY_UPSTREAMS: http://localhost:5000/   # Dev-Server auf dem Mac :contentReference[oaicite:2]{index=2}
+      OAUTH2_PROXY_HTTP_ADDRESS: 0.0.0.0:4180
+      OAUTH2_PROXY_LOG_LEVEL: debug  # <- NEU hinzufügen
+      OAUTH2_PROXY_REQUEST_LOGGING: "true"
+    restart: unless-stopped
+    depends_on:
+      keycloak:
+        condition: service_healthy  
+
+volumes:
+  kc_data:
+
