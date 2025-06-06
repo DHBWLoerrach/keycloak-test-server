@@ -2,8 +2,8 @@
 
 Mit diesem Docker-Container kann ein KeyCloak-Server 
 für Test- und Entwicklungsumgebungen simuliert werden.
-Mit dem Reserve-Proxy `oauth2-proxy` wird die Authentifizierung
-(Single Sign On) in einer Webanwendung möglich.  
+Mit dem Reserve-Proxy [oauth2-proxy](https://oauth2-proxy.github.io/oauth2-proxy/) 
+wird die Authentifizierung (Single Sign On) in einer Webanwendung möglich.  
 
 ## Einrichtung und Verwendung
 
@@ -18,7 +18,7 @@ Mit dem Reserve-Proxy `oauth2-proxy` wird die Authentifizierung
 ### Realm `dhbw` in KeyCloak erstellen
 
 1. `Manage realms` > `Create realm` 
-2. Im Dialog unter `Resource file` mit `Browse…` die Datei `dhbw-realm.json` auswählen.
+2. Im Dialog unter `Resource file` mit `Browse…` die Datei [`dhbw-realm.json`](dhbw-realm.json) auswählen.
 3. `Create` drücken
 4. Benutzer erstellen:
   - Unter `Users` den Button `Add user` drücken
@@ -35,4 +35,4 @@ Mit dem Reserve-Proxy `oauth2-proxy` wird die Authentifizierung
 
 Nun können wir beide Container zuerst stoppen und dann starten, z.B. mit `docker compose down && docker compose up -d`. 
 
-In der Webapp können wir uns nun mit den in KeyCloak erstellten Benutzern einloggen.
+In einer Webapp mit dem passenden Setup (siehe Web-Projekte an der DHBW Lörrach) können wir uns nun mit den in KeyCloak erstellten Benutzern einloggen.
