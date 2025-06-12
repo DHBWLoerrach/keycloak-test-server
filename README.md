@@ -28,7 +28,7 @@ wird die Authentifizierung (Single Sign On) in einer Webanwendung möglich.
   - In `department` den Kurs eintragen (z.B. `TIF25A`)
   - Benutzer mit `Create` erstellen
   - Für den Benutzer nun im Tab `Credentials` mit `Set password` das Passwort setzen und im angezeigten Dialog `Temporary` deaktivieren
-  - Falls der Benutzer ein Mitarbeiter ist, dann unter `Role mappings` die Rolle `staff` hinzufügen:
+  - Falls der Benutzer ein Mitarbeiter sein soll, dann unter `Role mappings` die Rolle `staff` hinzufügen:
     - `Assign role` und dann `Filter by realm roles` aktivieren, um dort `staff` zu selektieren und hinzuzufügen
 
 ### oauth2-proxy mit keycloak starten 
