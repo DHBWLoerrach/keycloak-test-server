@@ -1,3 +1,10 @@
+Wenn der Zugriff auf die Admin-Oberfläche im Browser (`localhost:8080`) https erfordern sollte, dann folgende Kommandos ausführen, um http zu erlauben:
+
+```
+docker exec -it keycloak-dev /opt/keycloak/bin/kcadm.sh config credentials --server http://localhost:8080   --realm master --user admin --password admin
+docker exec -it keycloak-dev /opt/keycloak/bin/kcadm.sh update realms/master -s sslRequired=NONE
+``` 
+
 ## Realm, Client usw. in KeyCloak manuell erstellen
 
 Realm `dhbw` erstellen:
