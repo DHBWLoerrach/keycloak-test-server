@@ -10,26 +10,27 @@ wird die Authentifizierung (Single Sign On) in einer Webanwendung möglich.
 ### Docker-Container starten
 
 1. ggf. Docker Desktop installieren
-2. Zunächst nur KeyCloak starten, dazu im Terminal ausführen: `docker compose up keycloak`
-3. KeyCloak-Adminoberfläche im Browser öffnen: http://localhost:8080
-4. Login mit `admin/admin`
-
+2. Dieses Projekt mit git clonen
+3. Im Terminal ins Projektverzeichnis wechseln
+4. Zunächst nur KeyCloak starten, dazu im Terminal ausführen: `docker compose up keycloak`
+5. KeyCloak-Adminoberfläche im Browser öffnen: http://localhost:8080
+6. Login mit `admin/admin`
 
 ### Realm `dhbw` in KeyCloak erstellen
 
 1. `Manage realms` > `Create realm` 
-2. Im Dialog unter `Resource file` mit `Browse…` die Datei [`dhbw-realm.json`](dhbw-realm.json) auswählen.
+2. Im Dialog unter `Resource file` mit `Browse…` die Datei [`dhbw-realm.json`](dhbw-realm.json) aus diesem Projekt auswählen.
 3. `Create` drücken
 4. Benutzer erstellen:
   - Unter `Users` den Button `Add user` drücken
   - `Email verified` aktivieren
-  - Gewünschten `Username` für Testbenutzer eintragen
-  - `Email`, `First name` und `Last name` eintragen
+  - Gewünschten `Username` für Testbenutzer eintragen (z.B. `user1`)
+  - `Email`, `First name` und `Last name` eintragen (z.B. `user1@example.com`, `Hans`, `Mustermann`)
   - In `department` den Kurs eintragen (z.B. `TIF25A`)
   - Benutzer mit `Create` erstellen
-  - Für den Benutzer nun im Tab `Credentials` mit `Set password` das Passwort setzen und im angezeigten Dialog `Temporary` deaktivieren
-  - Falls der Benutzer ein Mitarbeiter sein soll, dann unter `Role mappings` die Rolle `staff` hinzufügen:
-    - `Assign role` und dann `Filter by realm roles` aktivieren, um dort `staff` zu selektieren und hinzuzufügen
+  - Für den Benutzer nun im Tab `Credentials` mit `Set password` das Passwort setzen und im angezeigten Dialog den Schalter `Temporary` auf `Off` setzen bzw. deaktivieren
+  - Falls der Benutzer ein Mitarbeiter sein soll (z.B. für die Campus Rallye Admin Web-App), dann unter `Role mappings` die Rolle `staff` hinzufügen:
+    - `Assign role` und dann `Realm roles` klicken, um dort `staff (Mitarbeiter der DHBW)` zu selektieren und hinzuzufügen
 
 ### oauth2-proxy mit keycloak starten 
 
