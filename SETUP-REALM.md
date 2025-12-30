@@ -10,8 +10,8 @@ docker exec -it keycloak-dev /opt/keycloak/bin/kcadm.sh update realms/master -s 
 Realm `dhbw` erstellen:
 1. `Manage realms` > `Create realm` und dann `dhbw` als Namen eingeben und `Create` drücken
 2. `dhbw` sollte als `Current realm` automatisch ausgewählt sein
-3. Unter `Clients` mit `Create client` einen Client namens `carpool` erstellen:
-  - `Client ID` ist `carpool` (Rest bleibt gleich) und dann `Next`
+3. Unter `Clients` mit `Create client` einen Client namens `campusrallye` erstellen:
+  - `Client ID` ist `campusrallye` (Rest bleibt gleich) und dann `Next`
   - `Client authentication` aktivieren (Rest bleibt gleich) und dann `Next`
   - In `Valid redirect URIs` den Wert `http://localhost:5000` eintragen und dann mit `Save` speichern
 4. Unter `Realm roles` mit `Create role` die Rolle `staff` erstellen.
@@ -39,15 +39,15 @@ Realm `dhbw` erstellen:
   - In `Name` und `Token Claim Name` den Wert `department` eingeben
   - Unter `User Attribute` den Eintrag `department` wählen 
   - Mit `Save` speichern
-  - In der Seitenleiste zu `Clients` gehen und dort `carpool` auswählen
+  - In der Seitenleiste zu `Clients` gehen und dort `campusrallye` auswählen
   - Im Tab `Client scopes` den Button `Add client scope` drücken
   - Dort einen Haken bei `department` setzen und dann `Add>Default` drücken
 
-## oauth2-proxy einrichtien
+## oauth2-proxy einrichten
 
-Wir müssen nun das Client-Secret des `carpool`-Clients aus KeyCloak in die Konfiguration des Docker-Containers von oauth2-proxy eintragen:
+Wir müssen nun das Client-Secret des `campusrallye`-Clients aus KeyCloak in die Konfiguration des Docker-Containers von oauth2-proxy eintragen:
 
-1. Im Webinterface von KeyCloak unter `Clients` > `carpool` > `Credentials` das `Client Secret` in die Zwischenablage kopieren
+1. Im Webinterface von KeyCloak unter `Clients` > `campusrallye` > `Credentials` das `Client Secret` in die Zwischenablage kopieren
 2. Die Datei `docker-compose.yml` zum Bearbeiten im Editor öffnen.
 3. Unter `OAUTH2_PROXY_CLIENT_SECRET` das eben kopierte Client-Secret eintragen.
 
